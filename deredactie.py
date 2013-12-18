@@ -4,6 +4,7 @@ import time
 from urllib2 import urlopen
 from xml.dom.minidom import parseString
 
+ATOM_MIME_TYPE = 'application/atom+xml'
 VIDEO_MIME_TYPE = 'video/x-flv'
 START_URL = 'http://deredactie.be/cm/vrtnieuws/videozone?mode=atom'
 
@@ -28,7 +29,7 @@ def parse_feed_xml(xml):
 def parse_link(link_elem):
     attr = link_elem.attributes
     rel = attr['rel'].value
-    if rel == 'self' \
+    if (rel == 'self' and attr['type'].value == ATOM_MIME_TYPE) \
             or (rel == 'enclosure' and attr['type'].value == VIDEO_MIME_TYPE):
         title = attr['title'].value
         url = attr['href'].value
