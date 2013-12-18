@@ -1,12 +1,20 @@
 #!/usr/bin/env python
 
 import sys
+import time
 
-from deredactie import parse_feed
+from deredactie import parse_feed, START_URL
 
-url = sys.argv[1]
+if len(sys.argv) > 1:
+    url = sys.argv[1]
+else:
+    url = START_URL
+
 (title, entries) = parse_feed(url)
+
 print 'Title: {0}'.format(title)
+
 for entry in entries:
-    print '\n- {0}\n  Video: {1}\n  {2}'.format(
-        entry.title, entry.is_video, entry.url)
+    date = time.strftime('%Y-%m-%d %H:%M:%S', entry.date)
+    print '\n- {0}\n  Date: {1}\n  Video: {2}\n  URL: {3}'.format(
+        entry.title.encode('utf-8', 'ignore'), date, entry.is_video, entry.url)
