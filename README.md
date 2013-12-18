@@ -9,12 +9,6 @@ Usage
 Grab a zip, fire up XBMC's settings, and select *Install from zip file*.
 After installation, the plugin will be listed under your video add-ons.
 
-Features
---------
-
-This plugin just gets videos (with their title) from the main Videozone page.
-More goodies are on the way.
-
 Author
 ------
 
