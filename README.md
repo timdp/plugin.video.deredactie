@@ -12,7 +12,7 @@ After installation, the plugin will be listed under your video add-ons.
 Author
 ------
 
-[Tim De Pauw](http://pwnt.be/)
+[Tim De Pauw](http://tmdpw.eu/)
 
 License
 -------
