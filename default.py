@@ -5,7 +5,6 @@ import xbmcgui
 import xbmcplugin
 import xbmcaddon
 
-import re
 import sys
 import urllib
 import urlparse
