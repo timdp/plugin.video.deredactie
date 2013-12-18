@@ -6,10 +6,11 @@ import xbmcplugin
 import xbmcaddon
 
 import sys
+import time
 import urllib
 import urlparse
 
-from deredactie import parse_feed, START_URL, VIDEO_MIME_TYPE
+from deredactie import VideoItem, parse_feed, START_URL, VIDEO_MIME_TYPE
 
 __addon__ = xbmcaddon.Addon()
 
@@ -29,13 +30,18 @@ else:
 
 (title, entries) = parse_feed(url)
 for entry in entries:
-    li = xbmcgui.ListItem(entry.title)
-    li.setInfo('video', { 'title': entry.title })
-    if entry.is_video:
+    is_video = isinstance(entry, VideoItem)
+    if is_video:
+        li = xbmcgui.ListItem(entry.title, thumbnailImage=entry.thumbnail_url)
         li.setProperty('mimetype', VIDEO_MIME_TYPE)
         url = entry.url
     else:
+        li = xbmcgui.ListItem(entry.title)
         url = self + '?' + urllib.urlencode({ 'url': entry.url })
-    xbmcplugin.addDirectoryItem(handle, url, li, not entry.is_video)
+    li.setInfo('video', {
+        'title': entry.title,
+        'date': time.strftime('%d.%m.%Y', entry.date)
+    })
+    xbmcplugin.addDirectoryItem(handle, url, li, not is_video)
 
 xbmcplugin.endOfDirectory(handle, True)
