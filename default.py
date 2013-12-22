@@ -10,7 +10,7 @@ import time
 import urllib
 import urlparse
 
-from deredactie import VideoItem, parse_feed, START_URL, VIDEO_MIME_TYPE
+from deredactie import VideoItem, parse_feed, START_URL
 
 __addon__ = xbmcaddon.Addon()
 
@@ -33,7 +33,7 @@ for entry in entries:
     is_video = isinstance(entry, VideoItem)
     if is_video:
         li = xbmcgui.ListItem(entry.title, thumbnailImage=entry.thumbnail_url)
-        li.setProperty('mimetype', VIDEO_MIME_TYPE)
+        li.setProperty('mimetype', entry.mime_type)
         url = entry.url
     else:
         li = xbmcgui.ListItem(entry.title)
