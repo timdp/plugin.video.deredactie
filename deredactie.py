@@ -64,7 +64,8 @@ def parse_entry(entry_elem):
     if USE_HLS:
         elems = entry_elem.getElementsByTagName('vrtns:iosURL')
         if len(elems) and elems[0].firstChild is not None:
-            video_url = elems[0].firstChild.data + '/chunklist.m3u8'
+            video_url = elems[0].firstChild.data
+            video_url = re.sub(r'/playlist\.m3u8$', '/chunklist.m3u8', video_url)
             video_mime_type = PLAYLIST_MIME_TYPE
     date_str = entry_elem.getElementsByTagName('published')[0].firstChild.data
     date = time.strptime(date_str[:18], '%Y-%m-%dT%H:%M:%S')
