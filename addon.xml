@@ -12,9 +12,12 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">deredactie.be Videozone</summary>
-    <description lang="en">Lets you watch videos from deredactie.be.</description>
+    <summary lang="nl">deredactie.be Videozone</summary>
+    <description lang="en">Watch videos from deredactie.be.</description>
+    <description lang="nl">Bekijk video's van deredactie.be.</description>
     <disclaimer lang="en"></disclaimer>
-    <language></language>
+    <disclaimer lang="nl"></disclaimer>
+    <language>nl</language>
     <platform>all</platform>
     <license>MIT</license>
     <forum></forum>
