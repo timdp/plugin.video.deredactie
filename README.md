@@ -3,11 +3,14 @@ deredactie.be Videozone for XBMC
 
 XBMC plugin to watch videos from deredactie.be.
 
-Usage
------
+Installation
+------------
 
-Grab a zip, fire up XBMC's settings, and select *Install from zip file*.
-After installation, the plugin will be listed under your video add-ons.
+Go to _Settings_ &rarr; _Add-ons_ &rarr; _Get Add-ons_ &rarr; _XBMC.org Add-ons_
+&rarr; _Video Add-ons_ and find _deredactie.be Videozone_ in the list. Of
+course, you can also use the search feature.
+
+Alternatively, you can also grab a zip file of this repository and install that.
 
 Author
 ------
