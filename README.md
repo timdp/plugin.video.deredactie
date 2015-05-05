@@ -1,26 +1,22 @@
-deredactie.be Videozone for XBMC
-================================
+# deredactie.be Videozone for Kodi
 
-XBMC plugin to watch videos from deredactie.be.
+Kodi plugin to watch videos from deredactie.be.
 
-Installation
-------------
+## Installation
 
-Go to _Settings_ &rarr; _Add-ons_ &rarr; _Get Add-ons_ &rarr; _XBMC.org Add-ons_
-&rarr; _Video Add-ons_ and find _deredactie.be Videozone_ in the list. Of
-course, you can also use the search feature.
+Go to _Settings_ &rarr; _Add-ons_ &rarr; _Get Add-ons_ &rarr; _Kodi Add-on
+Repository_ &rarr; _Video Add-ons_ and find _deredactie.be Videozone_ in the
+list. Of course, you can also use the search feature.
 
 Alternatively, you can also grab a zip file of this repository and install that.
 
-Author
-------
+## Author
 
-[Tim De Pauw](http://tmdpw.eu/)
+[Tim De Pauw](https://tmdpw.eu/)
 
-License
--------
+## License
 
-Copyright &copy; 2014 Tim De Pauw
+Copyright &copy; 2015 Tim De Pauw
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
