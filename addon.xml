@@ -23,6 +23,6 @@
     <forum></forum>
     <website>https://github.com/timdp/plugin.video.deredactie</website>
     <email>hi at tmdpw dot eu</email>
-    <source>git://github.com/timdp/plugin.video.deredactie.git</source>
+    <source>https://github.com/timdp/plugin.video.deredactie</source>
   </extension>
 </addon>
