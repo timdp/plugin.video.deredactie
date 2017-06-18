@@ -12,10 +12,6 @@ FLASH_VIDEO_MIME_TYPE   = 'video/x-flv'
 PLAYLIST_MIME_TYPE      = 'application/x-mpegURL'
 START_URL               = 'http://deredactie.be/cm/vrtnieuws/videozone?mode=atom'
 
-# TODO Expose as preference
-USE_HLS = 1
-USE_HTTPS = 0
-
 class Item(object):
     def __init__(self, title, date, url, mime_type):
         self.title = title
@@ -30,26 +26,26 @@ class VideoItem(Item):
         self.thumbnail_url = thumbnail_url
         self.thumbnail_mime_type = thumbnail_mime_type
 
-def normalize_url(url):
+def normalize_url(url, use_https):
     if url is None:
         return url
-    protocol = 'https://' if USE_HTTPS else 'http://'
+    protocol = 'https://' if use_https else 'http://'
     return re.sub(r'.*?//', protocol, url)
 
-def parse_feed(url):
-    url = normalize_url(url)
-    return parse_feed_xml(_get_url(url))
+def parse_feed(url, use_hls, use_https):
+    url = normalize_url(url, use_https)
+    return parse_feed_xml(_get_url(url), use_hls, use_https)
 
-def parse_feed_xml(xml):
+def parse_feed_xml(xml, use_hls, use_https):
     dom = parseString(xml)
     title = dom.getElementsByTagName('title')[0].firstChild.data
     entries = []
     for entry_elem in dom.getElementsByTagName('entry'):
-        entry = parse_entry(entry_elem)
+        entry = parse_entry(entry_elem, use_hls, use_https)
         entries.append(entry)
     return (title, entries)
 
-def parse_entry(entry_elem):
+def parse_entry(entry_elem, use_hls, use_https):
     title = None
     date = None
     feed_url = None
@@ -63,13 +59,13 @@ def parse_entry(entry_elem):
         if rel == 'enclosure':
             if mime_type == THUMBNAIL_MIME_TYPE:
                 thumbnail_url = href
-            elif not USE_HLS and mime_type == FLASH_VIDEO_MIME_TYPE:
+            elif not use_hls and mime_type == FLASH_VIDEO_MIME_TYPE:
                 video_url = href
                 video_mime_type = FLASH_VIDEO_MIME_TYPE
         elif rel == 'self' and mime_type == ATOM_MIME_TYPE:
             title = attr['title'].value
             feed_url = href
-    if USE_HLS:
+    if use_hls:
         elems = entry_elem.getElementsByTagName('vrtns:iosURL')
         if len(elems) and elems[0].firstChild is not None:
             video_url = elems[0].firstChild.data
@@ -78,12 +74,12 @@ def parse_entry(entry_elem):
     date_str = entry_elem.getElementsByTagName('published')[0].firstChild.data
     date = time.strptime(date_str[:18], '%Y-%m-%dT%H:%M:%S')
     if video_url is not None:
-        video_url = normalize_url(video_url)
-        thumbnail_url = normalize_url(thumbnail_url)
+        video_url = normalize_url(video_url, use_https)
+        thumbnail_url = normalize_url(thumbnail_url, use_https)
         return VideoItem(title, date, video_url, video_mime_type,
             thumbnail_url, THUMBNAIL_MIME_TYPE)
     else:
-        feed_url = normalize_url(feed_url)
+        feed_url = normalize_url(feed_url, use_https)
         return Item(title, date, feed_url, ATOM_MIME_TYPE)
 
 def _get_url(url):
@@ -95,7 +91,7 @@ if __name__ == "__main__":
     else:
         url = START_URL
 
-    (title, entries) = parse_feed(url)
+    (title, entries) = parse_feed(url, True, False)
 
     print 'Title: {0}'.format(title)
 

@@ -1,0 +1,4 @@
+<settings>
+   <setting id="use_hls" type="bool" label="Use HTTP Live Streaming" default="true"/>
+   <setting id="use_ssl" type="bool" label="Use SSL" default="false"/>
+</settings>

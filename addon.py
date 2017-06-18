@@ -12,11 +12,14 @@ import urlparse
 
 from deredactie import VideoItem, parse_feed, START_URL
 
-__addon__ = xbmcaddon.Addon()
+addon = xbmcaddon.Addon()
 
 self   = sys.argv[0]
 handle = int(sys.argv[1])
 qs     = sys.argv[2]
+
+use_hls   = (addon.getSetting('use_hls') == 'true')
+use_https = (addon.getSetting('use_https') == 'true')
 
 if len(qs) > 1:
     params = urlparse.parse_qs(qs[1:])
@@ -28,7 +31,7 @@ if 'url' in params:
 else:
     url = START_URL
 
-(title, entries) = parse_feed(url)
+(title, entries) = parse_feed(url, use_hls, use_https)
 for entry in entries:
     is_video = isinstance(entry, VideoItem)
     if is_video:
